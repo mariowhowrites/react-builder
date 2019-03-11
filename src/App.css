@@ -1,2 +1,11 @@
 @tailwind preflight;
 @tailwind utilities;
+
+.hidePanel {
+  transition: transform 1s ease-in-out;
+  transform: translateX(94%);
+}
+
+.hidePanel #showToggler {
+  transform: rotate(-180deg);
+}

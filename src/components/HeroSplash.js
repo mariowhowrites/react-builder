@@ -1,9 +1,9 @@
 import React from "react"
 
-export default function HeroSplash() {
+export default function HeroSplash(props) {
   return (
-    <HeroSplashLayout>
-      <HeroSplashBox />
+    <HeroSplashLayout backgroundImage={props.backgroundImage}>
+      <HeroSplashBox {...props} />
     </HeroSplashLayout>
   )
 }
@@ -13,8 +13,7 @@ function HeroSplashLayout(props) {
     <section
       className="HeroSplash h-screen"
       style={{
-        backgroundImage:
-          "url(https://placester.com/wp-content/uploads/2015/01/best-listing-photos-travis-mark-urban.jpg)",
+        backgroundImage: `url(${props.backgroundImage.value})`,
         backgroundSize: "cover"
       }}
     >
@@ -25,15 +24,15 @@ function HeroSplashLayout(props) {
   )
 }
 
-function HeroSplashBox() {
+function HeroSplashBox(props) {
   return (
     <HeroSplashBoxLayout>
-      <HeroTitle />
-      <HeroSubtitle />
+      <HeroTitle {...props} />
+      <HeroSubtitle {...props} />
       <hr className="border-b border-blue-light opacity-50 mb-6" />
-      <HeroDetails />
+      <HeroDetails {...props} />
       <hr className="border-b border-blue-light opacity-50 my-6" />
-      <h3 className="text-center mt-8 mb-10 text-3xl">$590,000</h3>
+      <h3 className="text-center mt-8 mb-10 text-3xl">{props.price.value}</h3>
     </HeroSplashBoxLayout>
   )
 }
@@ -51,7 +50,7 @@ function HeroSplashBoxLayout(props) {
   )
 }
 
-function HeroTitle() {
+function HeroTitle({ streetAddress }) {
   return (
     <h2 className="py-6 text-3xl">
       <span
@@ -61,28 +60,30 @@ function HeroTitle() {
       >
         FOR SALE:
       </span>{" "}
-      5755 NW Sunnyside Drive
+      {streetAddress.value}
     </h2>
   )
 }
 
-function HeroSubtitle() {
-  return <div className="pb-6">5755 NW Sunnyside Drive, Mesa, AZ 85202</div>
+function HeroSubtitle({ streetAddress, city, state, zipCode }) {
+  return (
+    <div className="pb-6">{`${streetAddress.value}, ${city.value}, ${
+      state.value
+    } ${zipCode.value}`}</div>
+  )
 }
 
-function HeroDetails() {
+function HeroDetails({ amenities }) {
   return (
     <div className="flex flex-wrap">
-      <div className="w-1/2 flex justify-center items-center py-4">
-        4,700 SqFt
-      </div>
-      <div className="w-1/2 flex justify-center items-center py-4">
-        5 Bedrooms
-      </div>
-      <div className="w-1/2 flex justify-center items-center py-4">
-        4 Bathrooms
-      </div>
-      <div className="w-1/2 flex justify-center items-center py-4">Pool</div>
+      {amenities.value.map(amenity => (
+        <div
+          key={amenity.title}
+          className="w-1/2 flex justify-center items-center py-4"
+        >
+          {amenity.title}
+        </div>
+      ))}
     </div>
   )
 }

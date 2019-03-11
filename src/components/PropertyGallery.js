@@ -1,15 +1,15 @@
 import React from "react"
 
-export default function PropertyGallery() {
+export default function PropertyGallery({ sectionTitle, panels }) {
   return (
     <section className="PropertyGallery bg-blue-darker text-white flex flex-col items-center">
-      <h3 className="text-5xl font-normal pt-32 mb-24">Gallery</h3>
-      <div class="flex flex-wrap justify-between w-4/5">
-        {panels.map((panel, index) => (
+      <h3 className="text-5xl font-normal pt-32 mb-24">{sectionTitle.value}</h3>
+      <div className="flex flex-wrap justify-between w-4/5">
+        {panels.value.map((panel, index) => (
           <GalleryPanel
             panel={panel}
             index={index}
-            count={panels.length}
+            count={panels.value.length}
             key={panel.title}
           />
         ))}
@@ -41,36 +41,3 @@ function GalleryPanel({ panel, index, count }) {
     </div>
   )
 }
-
-const panels = [
-  {
-    image:
-      "https://lh3.googleusercontent.com/NigmQASJZAQ6sS1JmMWC7vFYjDUfUKHE2CTNRTnF2OQom2EkfFN_YL9fPs0bCQNrlrIhCfPbTLDBsU7UF2z-=w1024",
-    title: "Living Room"
-  },
-  {
-    image:
-      "https://lh3.googleusercontent.com/O8272JX-eFakblcxVImiwCEg8fA1rAbPkRr4ghG2EFtEsV5UuA_HuZgsv7J1A4wNjITiAcRwP5lNV35NsrqydbA=w1024",
-    title: "Eat-in Kitchen"
-  },
-  {
-    image:
-      "https://lh3.googleusercontent.com/vHWlBLUYzI2fNwS_2k44oVDFVe1SxRDx2G2Q4qpgQD7AtbG8rt3AVibhbXse8J208J6O7EEonh3m6Gw7S_E=w1024",
-    title: "Dining Room"
-  },
-  {
-    image:
-      "https://lh3.googleusercontent.com/vHWlBLUYzI2fNwS_2k44oVDFVe1SxRDx2G2Q4qpgQD7AtbG8rt3AVibhbXse8J208J6O7EEonh3m6Gw7S_E=w1024",
-    title: "Master Bedroom"
-  },
-  {
-    image:
-      "https://lh3.googleusercontent.com/QWYzB7vfNo1IvMzqDH2S2O_1kmJCzZmMtB8p-1-1-S_T3Av2eFSLLEQX7k0ZO8tZJdZBawo-ldDvsAOWzdKwCw=w1024",
-    title: "Entry Hall"
-  },
-  {
-    image:
-      "https://lh3.googleusercontent.com/akyJ0Y4cQ9wtjrp_kaOom5WChuCkdk7hgQFLyM-6rMYheYnTWRz6UdY1cYj-KuLr9b5A-rB-jF_r7wpADH3fAmE=w1024",
-    title: "Deck and Pool"
-  }
-]
