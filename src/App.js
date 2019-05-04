@@ -3,9 +3,9 @@ import "./App.css"
 import * as LeadPageComponents from "./components"
 import PageBuilder from "./builder/PageBuilder"
 import sampleData from "./stubs/siteData"
+import _ from "lodash"
 
 const App = function() {
-  
   /**
   What does the below function do?
   It takes a website schema
@@ -13,15 +13,11 @@ const App = function() {
   Maps over section arrays to add react hooks
   Converts array back into object
    */
-  let siteData = Object.entries(sampleData)
-    .flatMap(([key, value]) => {
-      const field = Object.create(null)
-
-      field[key] = convertSchemaToStateObject(value)
-
-      return field
-    })
-    .reduce(convertToObject, {})
+  let siteData = _(sampleData)
+    .toPairs()
+    .map(([key, value]) => [key, convertSchemaToStateObject(value)])
+    .fromPairs()
+    .value()
 
   return (
     <main className="relative">
@@ -42,9 +38,11 @@ const App = function() {
 export default App
 
 function convertSchemaToStateObject(schema) {
-  return Object.entries(schema)
-    .flatMap(attachState)
-    .reduce(convertToObject, {})
+  return _(schema)
+    .toPairs()
+    .map(attachState)
+    .fromPairs()
+    .value()
 }
 
 function attachState([key, field]) {
@@ -57,21 +55,5 @@ function attachState([key, field]) {
   field.value = value
   field.setter = setter
 
-  const formattedField = Object.create(null)
-
-  formattedField[key] = field
-
-  return formattedField
-}
-
-function convertToObject(oldField, field) {
-  if (!field || !oldField) {
-    return
-  }
-
-  const fieldName = Object.keys(field)[0]
-
-  oldField[fieldName] = field[fieldName]
-
-  return oldField
+  return [key, field]
 }

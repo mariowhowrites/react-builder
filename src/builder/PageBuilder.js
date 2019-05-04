@@ -4,6 +4,8 @@ import BuilderFields from "./BuilderFields"
 export default function PageBuilder({ sections }) {
   const [show, toggleShow] = useState(true)
 
+  console.log(sections)
+
   return (
     <aside
       id="PageBuilder"
