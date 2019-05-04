@@ -66,3 +66,51 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## Production Notes
+What should our top-level data component do?
+It should take a schema and default values
+Create React state using schema and default
+
+so let's imagine a possible schema:
+
+locationMapData:
+  sectionTitle:
+    default: "Location"
+    fieldType: text
+
+
+based on the above schema, how would we set state?
+```js
+Object.keys(locationMapData).map(key => {
+  const field = locationMapData[key]
+  const default = field.default
+
+  const setterFunctionName = `set${key}`
+
+  [field.value, field.setter] = useState(default)
+
+  return field
+})
+
+[title, setTitle] = setState(default)
+```
+
+now peel off all the first values and send them into component
+peel off whole array and send it into builder
+
+builder needs:
+field name
+current value
+setter function
+input type
+validation rules
+
+
+so, perhaps: 
+
+locationMapData:
+  sectionTitle:
+    value: title,
+    setter: setSectionTitle
+    fieldType: text

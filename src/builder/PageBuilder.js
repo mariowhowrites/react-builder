@@ -10,7 +10,8 @@ export default function PageBuilder({ sections }) {
       className={pageBuilderClasses(show)}
       style={{
         height: "100vh",
-        transition: "all 1s ease-in-out"
+        transition: "all 1s ease-in-out",
+        width: "40vw"
       }}
     >
       <div className="relative h-full pl-12">

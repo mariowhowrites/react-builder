@@ -1,4 +1,4 @@
-export default {
+const siteData = {
   heroSplash: {
     backgroundImage: {
       default:
@@ -262,3 +262,5 @@ export default {
     }
   }
 }
+
+export default siteData
