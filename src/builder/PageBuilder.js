@@ -1,10 +1,8 @@
 import React, { useState } from "react"
-import BuilderFields from "./BuilderFields"
+import BuilderSections from "./BuilderSections"
 
 export default function PageBuilder({ sections }) {
   const [show, toggleShow] = useState(true)
-
-  console.log(sections)
 
   return (
     <aside
@@ -18,7 +16,7 @@ export default function PageBuilder({ sections }) {
     >
       <div className="relative h-full pl-12">
         <ShowToggler show={show} toggleShow={toggleShow} />
-        <BuilderFields sections={sections} />
+        <BuilderSections sections={sections} />
       </div>
     </aside>
   )
@@ -41,7 +39,8 @@ function ShowToggler({ show, toggleShow }) {
 }
 
 function pageBuilderClasses(show) {
-  let classes = "fixed bg-white pin-r pin-t rounded-l-lg shadow-lg"
+  let classes =
+    "fixed bg-white pin-r pin-t rounded-l-lg shadow-lg overflow-auto z-20"
 
   if (!show) {
     classes = `${classes} hidePanel`

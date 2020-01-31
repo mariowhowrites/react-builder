@@ -3,7 +3,7 @@ import "./App.css"
 import * as LeadPageComponents from "./components"
 import PageBuilder from "./builder/PageBuilder"
 import sampleData from "./stubs/siteData"
-import _ from "lodash"
+import { associativeMap } from "./utils"
 
 const App = function() {
   /**
@@ -13,11 +13,10 @@ const App = function() {
   Maps over section arrays to add react hooks
   Converts array back into object
    */
-  let siteData = _(sampleData)
-    .toPairs()
-    .map(([key, value]) => [key, convertSchemaToStateObject(value)])
-    .fromPairs()
-    .value()
+  let siteData = associativeMap(sampleData, ([key, value]) => [
+    key,
+    convertSchemaToStateObject(value)
+  ])
 
   return (
     <main className="relative">
@@ -38,11 +37,7 @@ const App = function() {
 export default App
 
 function convertSchemaToStateObject(schema) {
-  return _(schema)
-    .toPairs()
-    .map(attachState)
-    .fromPairs()
-    .value()
+  return associativeMap(schema, attachState)
 }
 
 function attachState([key, field]) {
